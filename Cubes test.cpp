@@ -2,8 +2,9 @@
 #define NUMBER 100
 using namespace std;
 
-void squares(int expo[]){
-
+//Computes i^3 of 0 <= i >= 99
+//Prints out computation
+void cubes(int expo[]){
     for(int i = 0; i <  NUMBER; i++){
         expo[i] =  i*i*i;
         cout << expo[i] << "(" << i <<") ";
@@ -13,14 +14,14 @@ void squares(int expo[]){
     }
 };
 
-void diffSquares(int expo[],int expoDiff[]){
+//Difference of (i + 1)^3 - i^3
+void diffCubes(int expo[],int expoDiff[]){
     cout << endl << endl;
     cout << "Difference of (i + 1)^n - i^n"
          << "(i + 1)^3 - i^3" << endl
          << "= i^3 + 3i^2 + 3i + 1 - i^3" << endl
          << "= 3i^2 + 3i + 1" << endl << endl;
 
-    //int expoDiff[NUMBER];
     for(int j = 0; j < NUMBER - 1; j++){
         expoDiff[j] = expo[j + 1] - expo[j];
         cout << expoDiff[j] << "(" << j + 1 << " - " << j <<") ";
@@ -31,8 +32,10 @@ void diffSquares(int expo[],int expoDiff[]){
     cout << endl;
 };
 
-
-void diffOfDiffSquares(int expoDiff[], int diffExpoDiff[]){
+//Computers difference of the difference of cubes
+//(i + 2)^3 - (i + 1)^3 - ((i + 1)^3 - i^3)
+//Prints out computation
+void diffOfDiffCubes(int expoDiff[], int diffExpoDiff[]){
     cout << "Difference of the difference =" << endl
          << "(i + 2)^3 - (i + 1)^3 - ((i + 1)^3 - i^3)" << endl
          << "= (i + 2)^3 - 2(i + 1)^3 + i^3" << endl
@@ -40,7 +43,6 @@ void diffOfDiffSquares(int expoDiff[], int diffExpoDiff[]){
          << "= 6i - 6" << endl
          << "= 6(i - 1)" << endl << endl;
 
-    //int diffExpoDiff[NUMBER - 1];
     for(int j = 0; j < NUMBER - 2; j++){
         diffExpoDiff[j] = expoDiff[j + 1] - expoDiff[j];
         cout << diffExpoDiff[j] << "(" << j + 2 << ") ";
@@ -50,9 +52,11 @@ void diffOfDiffSquares(int expoDiff[], int diffExpoDiff[]){
     }
 };
 
+//Will add all the digits up until a single digit number is achieved.
+//i.e.: 27->10(2 + 7)->1(1 + 0)
+//Prints out computation
 void addDigits(int expoDiff[],int expoDiffDigitsAdded[]){
     cout << endl << endl;
-    //int expoDiffDigitsAdded[NUMBER];
 
     cout << "The digits of the Diff should add up to 7 or 1" << endl << endl;
 
@@ -90,9 +94,9 @@ int main(){
     int expoDiff[NUMBER];
     int diffExpoDiff[NUMBER - 1];
     int expoDiffDigitsAdded[NUMBER];
-    squares(expo);
-    diffSquares(expo,expoDiff);
-    diffOfDiffSquares(expoDiff, diffExpoDiff);
+    cubes(expo);
+    diffCubes(expo,expoDiff);
+    diffOfDiffCubes(expoDiff, diffExpoDiff);
     addDigits(expoDiff,expoDiffDigitsAdded);
 return 0;
 }
